@@ -100,9 +100,4 @@ RUN tensorflow/tools/ci_build/builds/configured GPU \
 
 WORKDIR /root
 
-# TensorBoard
-EXPOSE 6006
-# IPython
-EXPOSE 8888
-
 RUN ["/bin/bash"]
