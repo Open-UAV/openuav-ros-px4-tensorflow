@@ -1,0 +1,21 @@
+---
+
+- hosts : localhost
+  vars:
+      outport: 85
+      inport: 75
+  tasks:
+    - name: Create a data container
+      docker_container:
+        image: openuav-gz-tf
+        name: test-ansible
+        interactive: yes
+        tty: yes
+        detach: yes
+        ports:
+            - "{{outport}}:{{outport}}"
+            - "{{inport}}:{{inport}}"
+        command: bash
+
+    - name: setup container
+      command: docker exec test-ansible bash -l -c "source .bashrc; apt-get update && apt-get install sed;sed -i -- 's/7681/{{inport}}/g' ~/gzweb/http/client/gz3d.js; sed -i -- 's/7681/{{inport}}/g' ~/gzweb/gzbridge/ws_server.js"
