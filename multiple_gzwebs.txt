@@ -1,0 +1,24 @@
+How to Set up multiple GZservers Steps
+
+Note ansible does this all for you except step 3
+
+1. Create docker image with gzweb/gazebo. Either copy an existing one or open the image and download gzweb/gazebo. It is important when you run the container that you specify a couple ports for the outside server to use. These ports MUST be different from other containers. No ports need to be exposed
+	1. a port for output
+	2. a port for input
+here is an example:
+sudo docker run -dit -p 82:82 -p 71:71 openuav-tf-gzweb bash
+port 82 is my output
+port 71 is my input
+
+2. In order for gzweb to use these port a couple files inside the container need to be edited.
+	a. Edit gzweb/http/client/gz3d.js line 2222. Replace 7681 with your input port (in the above example I used 71)
+	b. Edit gzweb/gzbridge/ws_server.js line 37 and 38. Replace 7681 with your input port (again, mine would be 71)
+
+3. Run gzweb. To test go to the gzweb directory, and run ./start_gzweb.sh -p <your-output-port> && gzserver. 
+	Example:
+	$ ./start_gzweb.sh -p 82 && gzserver
+
+4. In the host open up localhost:outputport. E.g localhost:82
+
+Done!
+
