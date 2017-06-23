@@ -18,4 +18,5 @@ Once running you must do the following steps:
   
 To run with ansible:<br />
   add "localhost ansible_connection=local" to /etc/ansible/hosts file<br />
-  ansible-playbook test-ansible.yml //the ports are automatically changed to 75 85 so when you run gzserver use -p 85
+  Run the playbook. The ports are automatically changed to 75 85 so when you run gzserver use -p 85<br />
+  ansible-playbook test-ansible.yml
