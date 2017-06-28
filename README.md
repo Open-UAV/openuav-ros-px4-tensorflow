@@ -7,8 +7,8 @@ This dockerfile makes a image with the following installs <br />
 -openai gym <br />
 -tensorflow <br />
 
-## To build run:
-sudo nvidia-docker build --no-cache=true -t openuav-gz-tf -f Dockerfile.devel-gpu .
+## To build:
+run: sudo nvidia-docker build --no-cache=true -t openuav-gz-tf -f Dockerfile.devel-gpu .
 
 Once running you must do the following steps:
 1. Build again. Note px4 will hang (a bug) so give it a couple seconds then end it <br />
