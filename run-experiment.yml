@@ -1,0 +1,17 @@
+---
+- hosts : localhost
+  tasks:
+    - name: Create a data container
+      docker_container:
+        image: openuav-gz-tf
+        name: "experiment-{{experiment}}"
+        interactive: yes
+        tty: yes
+        detach: yes
+        ports:
+            - "{{outport}}:{{outport}}"
+            - "{{inport}}:{{inport}}"
+        command: bash
+
+    - name: setup container
+      command: nvidia-docker exec "experiment-{{experiment}}" bash -l -c "source .bashrc; apt-get update && apt-get install sed; cd ~/UAV-NAV && git pull origin master;sed -i -- 's/7681/{{inport}}/g' ~/gzweb/http/client/gz3d.js; sed -i -- 's/7681/{{inport}}/g' ~/gzweb/gzbridge/ws_server.js; sed -i -- 's/logfile-exp-1/logfile-exp-{{experiment}}/g' ~/UAV-NAV/deepQlearner.py"

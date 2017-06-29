@@ -1,14 +1,15 @@
 ---
 
 - hosts : localhost
-  vars:
-      outport: 85
-      inport: 75
+  #Uncomment to run without additiona commandline arguments
+  #vars:
+  #    outport: 85
+  #    inport: 75
   tasks:
     - name: Create a data container
       docker_container:
         image: openuav-gz-tf
-        name: test-ansible
+        name: test-camera
         interactive: yes
         tty: yes
         detach: yes
@@ -18,4 +19,4 @@
         command: bash
 
     - name: setup container
-      command: docker exec test-ansible bash -l -c "source .bashrc; apt-get update && apt-get install sed;sed -i -- 's/7681/{{inport}}/g' ~/gzweb/http/client/gz3d.js; sed -i -- 's/7681/{{inport}}/g' ~/gzweb/gzbridge/ws_server.js"
+      command: docker exec test-camera bash -l -c "source .bashrc; apt-get update && apt-get install sed;sed -i -- 's/71/{{inport}}/g' ~/gzweb/http/client/gz3d.js; sed -i -- 's/71/{{inport}}/g' ~/gzweb/gzbridge/ws_server.js"
