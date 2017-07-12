@@ -1,0 +1,11 @@
+---
+- hosts : localhost
+  tasks:
+    - name: stop multi1
+      command: docker stop multi1 
+
+    - name: restart multi1
+      command: docker start multi1
+
+    - name: clean multi1
+      command: docker exec -t multi1 bash /root/src/Firmware/Tools/clean_uav.sh
