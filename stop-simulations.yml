@@ -9,3 +9,12 @@
 
     - name: clean multi1
       command: docker exec -t multi1 bash /root/src/Firmware/Tools/clean_uav.sh
+
+    - name: stop multi2
+      command: docker stop multi2
+
+    - name: restart multi2
+      command: docker start multi2
+
+    - name: clean multi2
+      command: docker exec -t multi2 bash /root/src/Firmware/Tools/clean_uav.sh
