@@ -8,7 +8,7 @@ This dockerfile makes a image with the following installs <br />
 -tensorflow <br />
 
 ## To build:
-run: sudo nvidia-docker build --no-cache=true -t openuav-gz-tf -f Dockerfile.devel-gpu
+run: sudo nvidia-docker build --no-cache=true -t openuav-gz-tf -f Dockerfile.devel-gpu <br />
 Note: this will take a while to setup (~45min)
 
 Once running you must do the following steps:
