@@ -30,4 +30,4 @@ Once running you must do the following steps:
     -e DISPLAY=$DISPLAY \<br />
     openuav-gz-tf bash<br />
     
-  4. This should make a container that forwards xapps to the machine (ssh -X will not push that to your remote machine. We are working on fixing this). This will also allow camera emulation inside of a ros simulation.
+  4. This should make a container that forwards xapps to the machine (ssh -X will not push that to your remote machine. See below). This will also allow camera emulation inside of a ros simulation. For remote access to the camera, setup ssh server on conatiner and connect through a forwarded docker port.
