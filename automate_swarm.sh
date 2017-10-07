@@ -1,6 +1,6 @@
 #!/bin/bash
 #Script to automate all of swarm formation running
-source num_uavs.sh
+source sim-params.sh
 echo $num_uavs
 echo $gzweb_ctrl_port
 echo $gzweb_gui_port
@@ -14,9 +14,7 @@ nvidia-docker exec anna_test bash /runpy1.sh $num_uavs &>/dev/null &
 export ROS_IP=158.130.51.35
 export ROS_MASTER_URI=$(docker inspect anna_test | grep IPAddress | awk 'FNR==2 {print $2}'| sed 's/",/:11311/g'|sed 's,",'http://',g')
 
-nvidia-docker exec anna_test bash /runpy2.sh &>/dev/null &
+nvidia-docker exec anna_test bash /runpy2.sh $gzweb_ctrl_port $gzweb_gui_port &>/dev/null &
 python /usr/local/MATLAB/R2017a/toolbox/anna-ares/generate_formation_points.py $num_uavs &
 nvidia-docker exec anna_test bash /runpy3.sh $num_uavs &>/dev/null &
-nvidia-docker exec anna_test bash /runpy4.sh  &>/dev/null &
-
-
+nvidia-docker exec anna_test bash /runpy4.sh $ros_websocket_port &>/dev/null &
